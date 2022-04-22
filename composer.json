@@ -1,0 +1,19 @@
+{
+    "name": "traineratwot/php-cli",
+    "description": "php cli framework",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Traineratwot\\PhpCli\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kirill",
+            "email": "41589091+Traineratwot@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
