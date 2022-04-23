@@ -6,6 +6,8 @@
 
 	class TypeFloat extends Type
 	{
+		public static $shotName = 'float';
+
 		public function validate($value)
 		{
 			return is_numeric($value) ? TRUE : 'Invalid Number';

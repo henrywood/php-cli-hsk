@@ -2,7 +2,6 @@
 
 	namespace Traineratwot\PhpCli;
 
-	use Exception;
 	use RuntimeException;
 	use Traineratwot\PhpCli\options\Option;
 	use Traineratwot\PhpCli\options\Parameter;
@@ -12,12 +11,22 @@
 	{
 		private $_argPosition = 2;
 		/**
-		 * @var array<Parameter|Option>
+		 * @var Option[]|Parameter[]
 		 */
 		private $arguments = [];
 
 		/**
-		 * @return string
+		 * @return Option[]|Parameter[]
+		 */
+		public function getArgumentsList()
+		{
+			return $this->arguments;
+		}
+
+		/**
+		 * Returns command description
+		 * if return FALSE disable HELP info
+		 * @return string|false|void|null;
 		 */
 		abstract public function help();
 
@@ -77,8 +86,9 @@
 		public function getArg($key)
 		{
 			if (array_key_exists($key, $this->arguments)) {
-				$this->arguments[$key]->get();
+				return $this->arguments[$key]->get();
 			}
+			return NULL;
 		}
 
 		public function getArgs()

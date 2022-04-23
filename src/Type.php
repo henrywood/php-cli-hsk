@@ -4,20 +4,23 @@
 
 	abstract class Type
 	{
-		protected $value;
+		/**
+		 * Shot name for help
+		 * if empty use class name
+		 * @var string
+		 */
+		public static $shotName = '';
+		protected     $value;
 
 		/**
+		 * Class for validation input parameters
+		 *
 		 * @throws TypeException
 		 */
 		public function __construct($value)
 		{
 			$this->set($value);
 		}
-
-		/**
-		 * @return mixed
-		 */
-		public function get() { return $this->value; }
 
 		/**
 		 * @throws TypeException
@@ -36,4 +39,9 @@
 		 * @return string|TRUE
 		 */
 		abstract public function validate($value);
+
+		/**
+		 * @return mixed
+		 */
+		public function get() { return $this->value; }
 	}

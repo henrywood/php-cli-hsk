@@ -6,12 +6,9 @@
 	use Traineratwot\PhpCli\Console;
 	use Traineratwot\PhpCli\TypeException;
 
-	class Option implements Value
+	class Option extends Value
 	{
 		private $long;
-		private $require;
-		private $type;
-		private $description;
 		private $position;
 		private $short;
 
@@ -28,21 +25,6 @@
 			$this->position    = $position;
 		}
 
-		/**
-		 * @param $value
-		 * @return void
-		 * @throws TypeException
-		 */
-		public function set($value)
-		{
-			try {
-				$cls         = $this->type;
-				$this->value = new $cls($value);
-			} catch (TypeException $e) {
-				throw new TypeException($e->getMessage(), $e->getCode());
-			}
-		}
-
 		public function get()
 		{
 			if ($this->value) {
@@ -53,10 +35,6 @@
 
 		public function initValue()
 		{
-			$short = NULL;
-			if ($this->short) {
-				$short = $this->short . ':';
-			}
 			$option = Console::getOpt();
 			if (array_key_exists($this->long, $option) || array_key_exists($this->short, $option)) {
 				$v = $option[$this->short] ?: $option[$this->long];
@@ -72,8 +50,18 @@
 			}
 		}
 
-		public function getDescription()
+		/**
+		 * @param $value
+		 * @return void
+		 * @throws TypeException
+		 */
+		public function set($value)
 		{
-			return $this->description;
+			try {
+				$cls         = $this->type;
+				$this->value = new $cls($value);
+			} catch (TypeException $e) {
+				throw new TypeException($e->getMessage(), $e->getCode());
+			}
 		}
 	}

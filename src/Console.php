@@ -100,6 +100,18 @@
 			return $password;
 		}
 
+		/**
+		 * Return operating system type
+		 * @return string
+		 */
+		public static function getSystem()
+		{
+			$sys = mb_strtolower(php_uname('s'));
+			if (strpos($sys, 'windows') !== FALSE) {
+				return 'win';
+			}
+			return 'nix';
+		}
 
 		/**
 		 * Echo Red text
@@ -110,18 +122,6 @@
 		{
 			$t = ucfirst($t);
 			echo self::getColoredString($t, 'red') . PHP_EOL;
-		}
-
-
-		/**
-		 * Echo light_red text
-		 * @param $t
-		 * @return void
-		 */
-		public static function error($t)
-		{
-			$t = ucfirst($t);
-			echo self::getColoredString($t, 'light_red') . PHP_EOL;
 		}
 
 		/**
@@ -150,6 +150,16 @@
 			return $string;
 		}
 
+		/**
+		 * Echo light_red text
+		 * @param $t
+		 * @return void
+		 */
+		public static function error($t)
+		{
+			$t = ucfirst($t);
+			echo self::getColoredString($t, 'light_red') . PHP_EOL;
+		}
 
 		/**
 		 * Echo Yellow text
@@ -162,7 +172,6 @@
 			echo self::getColoredString($t, 'yellow') . PHP_EOL;
 		}
 
-
 		/**
 		 * Echo blue text
 		 * @param $t
@@ -174,7 +183,6 @@
 			echo self::getColoredString($t, 'cyan') . PHP_EOL;
 		}
 
-
 		/**
 		 * Echo Green text
 		 * @param $t
@@ -184,19 +192,6 @@
 		{
 			$t = ucfirst($t);
 			echo self::getColoredString($t, 'green') . PHP_EOL;
-		}
-
-		/**
-		 * Return operating system type
-		 * @return string
-		 */
-		public static function getSystem()
-		{
-			$sys = mb_strtolower(php_uname('s'));
-			if (strpos($sys, 'windows') !== FALSE) {
-				return 'win';
-			}
-			return 'nix';
 		}
 
 		/**
@@ -248,7 +243,8 @@
 					if (empty($val)) {
 						$arg = explode('=', substr($arg, 1), 2);
 						if (count($arg) === 2) {
-							$val = $arg[1];
+							$opt = array_shift($arg);
+							$val = array_shift($arg);
 						}
 					}
 					$options[$opt] = $val;

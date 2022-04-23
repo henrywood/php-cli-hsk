@@ -6,6 +6,8 @@
 
 	class TypeInt extends Type
 	{
+		public static $shotName = 'int';
+
 		public function validate($value)
 		{
 			return is_numeric($value) && is_int($value) ? TRUE : 'Invalid Number';

@@ -6,8 +6,10 @@
 
 	class TypeString extends Type
 	{
+		public static $shotName = 'string';
+
 		public function validate($value)
 		{
-			return is_string($value)?TRUE:'Invalid string';
+			return is_string($value) ? TRUE : 'Invalid string';
 		}
 	}
