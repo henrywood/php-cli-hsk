@@ -1,19 +1,31 @@
 {
-    "name": "traineratwot/php-cli",
-    "description": "php cli framework",
-    "type": "composer-plugin",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Traineratwot\\PhpCli\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Kirill",
-            "email": "41589091+Traineratwot@users.noreply.github.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {}
+	"name"             :"traineratwot/php-cli",
+	"version"          :"0.0.1",
+	"description"      :"php cli framework",
+	"type"             :"composer-plugin",
+	"license"          :"MIT",
+	"autoload"         :{
+		"psr-4":{
+			"Traineratwot\\PhpCli\\":"src/"
+		}
+	},
+	"authors"          :[
+		{
+			"name" :"Kirill",
+			"email":"Traineratwot@yandex.ru"
+		}
+	],
+	"keywords"         :[
+		"CLI",
+		"PSR-4",
+		"framework",
+		"simple"
+	],
+	"minimum-stability":"stable",
+	"require"          :{
+		"phplucidframe/console-table":"^1.2"
+	},
+	"require-dev"      :{
+		"roave/security-advisories":"dev-latest"
+	}
 }
