@@ -9,6 +9,7 @@ It takes care of
 - **colored output**
 - **prompt**
 - **PSR-4 compatibility**
+- **support all php versions >= 5.6**
 
 Use composer:
 ```php composer.phar require traineratwot/php-cli```

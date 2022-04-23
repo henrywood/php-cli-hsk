@@ -28,7 +28,7 @@
 
 		public function getCommands()
 		{
-			return $this->commands;
+			return array_merge(['Default' => $this->defaultCmd], $this->commands);
 		}
 
 		/**
@@ -58,6 +58,8 @@
 			} else {
 				try {
 					$this->runDefault();
+				} catch (TypeException $e) {
+					throw new TypeException($e->getMessage(), $e->getCode());
 				} catch (Exception $e) {
 					throw new RuntimeException(Console::getColoredString('Unknown command "' . $command . '" ', 'light_red'));
 				}
@@ -114,6 +116,7 @@
 		{
 			$this->defaultCmd = $cmd;
 			if ($this->defaultCmd instanceof Cmd) {
+				$this->defaultCmd->setArgPosition(1);
 				$this->defaultCmd->setup();
 			}
 			return $this;

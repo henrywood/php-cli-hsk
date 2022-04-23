@@ -10,7 +10,7 @@
 
 		public function validate($value)
 		{
-			return is_numeric($value) && is_int($value) ? TRUE : 'Invalid Number';
+			return is_numeric($value) && is_int(+$value) ? TRUE : 'Invalid integer "' . $value . '"';
 		}
 
 		public function get()

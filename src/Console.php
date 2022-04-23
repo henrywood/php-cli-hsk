@@ -50,7 +50,6 @@
 			return array_keys(self::$FOREGROUND_COLORS);
 		}
 
-
 		/**
 		 * Returns all background color names
 		 * @return array
@@ -59,7 +58,6 @@
 		{
 			return array_keys(self::$BACKGROUND_COLORS);
 		}
-
 
 		/**
 		 * Prompt Ask user, Return user prompt

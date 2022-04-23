@@ -10,6 +10,6 @@
 
 		public function validate($value)
 		{
-			return is_string($value) ? TRUE : 'Invalid string';
+			return is_string($value) ? TRUE : 'Invalid string "'.$value.'"';
 		}
 	}

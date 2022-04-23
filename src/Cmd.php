@@ -15,6 +15,10 @@
 		 */
 		private $arguments = [];
 
+		public function setArgPosition($v)
+		{
+			$this->_argPosition = $v;
+		}
 		/**
 		 * @return Option[]|Parameter[]
 		 */
