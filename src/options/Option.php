@@ -8,9 +8,9 @@
 
 	class Option extends Value
 	{
-		private $long;
-		private $position;
-		private $short;
+		protected $long;
+		protected $position;
+		protected $short;
 
 		public function __construct($long, $short, $require, $type, $description, $position)
 		{
@@ -63,5 +63,15 @@
 			} catch (TypeException $e) {
 				throw new TypeException($e->getMessage(), $e->getCode());
 			}
+		}
+
+		public function getLong()
+		{
+			return $this->long;
+		}
+
+		public function getShort()
+		{
+			return $this->short;
 		}
 	}

@@ -10,11 +10,11 @@
 		/**
 		 * @var string
 		 */
-		private $key;
+		protected $key;
 		/**
 		 * @var int
 		 */
-		private $position;
+		protected $position;
 
 		/**
 		 * @template T of Traineratwot\PhpCli\Type
@@ -65,5 +65,10 @@
 			} catch (TypeException $e) {
 				throw new TypeException($e->getMessage(), $e->getCode());
 			}
+		}
+
+		public function getPos()
+		{
+			return $this->position;
 		}
 	}

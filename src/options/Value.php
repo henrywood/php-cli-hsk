@@ -24,7 +24,7 @@
 		/**
 		 * @var Type|null
 		 */
-		protected $value;
+		public $value;
 
 		/**
 		 * @return void

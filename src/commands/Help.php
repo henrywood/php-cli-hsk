@@ -3,8 +3,10 @@
 	namespace Traineratwot\PhpCli\commands;
 
 	use LucidFrame\Console\ConsoleTable;
+	use RuntimeException;
 	use Traineratwot\PhpCli\CLI;
 	use Traineratwot\PhpCli\Cmd;
+	use Traineratwot\PhpCli\Console;
 	use Traineratwot\PhpCli\options\Option;
 	use Traineratwot\PhpCli\options\Parameter;
 	use Traineratwot\PhpCli\types\TypeString;
@@ -26,9 +28,10 @@
 			$this->registerParameter('cmd', 0, TypeString::class, 'Enter cmd name for more information');
 		}
 
-		public function Run()
+		public function run()
 		{
-			if (!$this->getArg('cmd')) {
+			$command = $this->getArg('cmd');
+			if (!$command) {
 				$table = new ConsoleTable();
 				$table
 					->hideBorder()
@@ -39,11 +42,11 @@
 				;
 				$helps    = [];
 				$commands = $this->CIL->getCommands();
-				foreach ($commands as $command => $cmd) {
-					if ($cmd instanceof Cmd) {
-						$helps[get_class($cmd)] = [
-							'cls'      => $cmd,
-							'commands' => array_merge(isset($helps[get_class($cmd)]) ? $helps[get_class($cmd)]['commands'] : [], [$command]),
+				foreach ($commands as $command => $cls) {
+					if ($cls instanceof Cmd) {
+						$helps[get_class($cls)] = [
+							'cls'      => $cls,
+							'commands' => array_merge(isset($helps[get_class($cls)]) ? $helps[get_class($cls)]['commands'] : [], [$command]),
 						];
 					}
 				}
@@ -53,24 +56,11 @@
 						continue;
 					}
 					$mainCommand = array_shift($info['commands']);
-
-					$arguments = $info['cls']->getArgumentsList();
+					$arguments   = $info['cls']->getArgumentsList();
 					/**
 					 * @var Option|Parameter $arguments
 					 */
-					$args = '';
-					foreach ($arguments as $key => $argument) {
-						$require = $argument->getRequire();
-						if (!$require) {
-							$args .= "?";
-						}
-						$args .= $key;
-						$t    = $argument->getType();
-						$type = $t::$shotName;
-						if ($t) {
-							$args .= "<$type>";
-						}
-					}
+					$args = $this->extracted($arguments);
 					$table->addRow()
 						  ->addColumn("\> $mainCommand")
 						  ->addColumn($args)
@@ -79,8 +69,51 @@
 						  ->addBorderLine()
 					;
 				}
-
 				$table->display();
+			} else {
+				$commands = $this->CIL->getCommands();
+				if (!array_key_exists($command, $commands)) {
+					throw new RuntimeException(Console::getColoredString('Unknown command "' . $command . '" ', 'light_red'));
+				}
+				$cls = $commands[$command];
+				if ($cls instanceof Cmd) {
+					$description = $cls->help();
+					if ($description === FALSE) {
+						throw new RuntimeException(Console::getColoredString('Unknown command "' . $command . '" ', 'light_red'));
+					}
+					$helps = [
+						'cls'      => $cls,
+						'commands' => array_merge(isset($helps[get_class($cls)]) ? $helps[get_class($cls)]['commands'] : [], [$command]),
+					];
+					if (empty($description)) {
+						Console::info($command);
+					} else {
+						Console::info($command . " - " . $description);
+					}
+					$arguments = $cls->getArgumentsList();
+					$this->extracted($arguments, $args, $match);
+					if (count($args) > 0) {
+						$table2 = new ConsoleTable();
+						$table2
+							->hideBorder()
+							->addHeader('argument')
+							->addHeader('type')
+							->addHeader('require')
+							->addHeader('description')
+						;
+						foreach ($match as $arg) {
+							$table2->addRow()
+								   ->addColumn((string)$arg['key'])
+								   ->addColumn((string)$arg['type'])
+								   ->addColumn((string)$arg['require'])
+								   ->addColumn((string)$arg['description'])
+								   ->addBorderLine()
+							;
+						}
+						$table2->setIndent(4);
+						$table2->display();
+					}
+				}
 			}
 		}
 
@@ -90,5 +123,52 @@
 		public function help()
 		{
 			return "Show help information about command";
+		}
+
+		/**
+		 * @param $arguments
+		 * @return string
+		 */
+		public function extracted($arguments, &$args = [], &$match = [])
+		{
+			foreach ($arguments as $key => $argument) {
+				$type    = '';
+				$require = $argument->getRequire();
+				$t       = $argument->getType();
+				if ($t && class_exists($t)) {
+					$type = $t::$shotName;
+				}
+				$description  = $argument->getDescription();
+				$key_extended = $key;
+				if ($argument instanceof Option) {
+					$key_extended = '--' . $argument->getLong();
+					if ($s = $argument->getShort()) {
+						$key_extended .= ', -' . $s;
+					}
+				} elseif ($argument instanceof Parameter) {
+					$key_extended .= ' (pos:' . $argument->getPos() . ')';
+				}
+				$match[$key] = [
+					"type"        => $type,
+					"require"     => (int)$require,
+					"key"         => $key_extended,
+					"description" => $description,
+				];
+			}
+			foreach ($match as $key => $argument) {
+				$arg = '';
+				if (!$argument['require']) {
+					$arg .= "?";
+				}
+				$arg .= $key;
+				if ($argument['type']) {
+					$arg .= "<{$argument['type']}>";
+				}
+				if ($arg) {
+					$args[] = $arg;
+				}
+			}
+
+			return implode(", ", $args);
 		}
 	}

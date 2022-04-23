@@ -33,12 +33,12 @@
 		/**
 		 * @throws TypeException
 		 */
-		public function _setup()
+		public function _run()
 		{
-			$this->setup();
 			foreach ($this->arguments as $v) {
 				$v->initValue();
 			}
+			$this->run();
 		}
 
 		abstract public function setup();
@@ -57,8 +57,10 @@
 			if (debug_backtrace()[1]['function'] !== 'setup') {
 				throw new RuntimeException(Console::getColoredString(__FUNCTION__ . ' Must be called from method setup', 'light_red'));
 			}
-			$this->arguments[$key] = new Parameter($key, $require, $type, $description, $this->_argPosition);
-			$this->_argPosition++;
+			if (!array_key_exists($key, $this->arguments)) {
+				$this->arguments[$key] = new Parameter($key, $require, $type, $description, $this->_argPosition);
+				$this->_argPosition++;
+			}
 		}
 
 		/**
@@ -77,11 +79,13 @@
 			if (debug_backtrace()[1]['function'] !== 'setup') {
 				throw new RuntimeException(__FUNCTION__ . ' Must be called from method setup');
 			}
-			$this->arguments[$long] = new Option($long, $short, $require, $type, $description, $this->_argPosition);
-			$this->_argPosition++;
+			if (!array_key_exists($long, $this->arguments)) {
+				$this->arguments[$long] = new Option($long, $short, $require, $type, $description, $this->_argPosition);
+				$this->_argPosition++;
+			}
 		}
 
-		abstract public function Run();
+		abstract public function run();
 
 		public function getArg($key)
 		{

@@ -4,6 +4,8 @@
 	"description"      :"php cli framework",
 	"type"             :"composer-plugin",
 	"license"          :"MIT",
+	"readme"           :"./README.md",
+	"homepage"         :"https://github.com/traineratwot/php-cli",
 	"autoload"         :{
 		"psr-4":{
 			"Traineratwot\\PhpCli\\":"src/"
