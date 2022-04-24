@@ -55,7 +55,7 @@
 		 * @param                 $key
 		 * @param                 $require
 		 * @param class-string<T> $type
-		 * @param TString         $description
+		 * @param string          $description
 		 * @return void
 		 * @throws RuntimeException
 		 */
@@ -72,12 +72,12 @@
 
 		/**
 		 * Register an option for option parsing and help generation
-		 * @param TString         $long    multi character option (specified with --)
-		 * @param TString|null    $short   one character option (specified with -)
+		 * @param string          $long    multi character option (specified with --)
+		 * @param string|null     $short   one character option (specified with -)
 		 * @param bool|TString    $require does this option require an argument? give it a name here
 		 * @template T of Traineratwot\PhpCli\Type
 		 * @param class-string<T> $type
-		 * @param TString         $description
+		 * @param string          $description
 		 * @return void
 		 * @throws RuntimeException
 		 */
