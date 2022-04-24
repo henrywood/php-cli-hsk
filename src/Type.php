@@ -38,7 +38,7 @@
 		}
 
 		/**
-		 * @return \string|TRUE
+		 * @return string|TRUE
 		 */
 		abstract public function validate($value);
 

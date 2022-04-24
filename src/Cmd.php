@@ -31,7 +31,7 @@
 		/**
 		 * Returns command description
 		 * if return FALSE disable HELP info
-		 * @return \string|false|void|null;
+		 * @return string|false|void|null;
 		 */
 		abstract public function help();
 

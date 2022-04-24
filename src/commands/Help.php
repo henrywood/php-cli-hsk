@@ -137,7 +137,7 @@
 		 * @param       $arguments
 		 * @param array $args
 		 * @param array $match
-		 * @return \string
+		 * @return string
 		 */
 		public function extracted($arguments, &$args = [], &$match = [])
 		{

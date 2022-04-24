@@ -40,7 +40,7 @@
 		abstract public function get();
 
 		/**
-		 * @return \string
+		 * @return string
 		 */
 		public function getDescription()
 		{
@@ -48,7 +48,7 @@
 		}
 
 		/**
-		 * @return \string
+		 * @return string
 		 */
 		public function getType()
 		{

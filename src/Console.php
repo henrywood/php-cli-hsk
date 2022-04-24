@@ -63,7 +63,7 @@
 		 * Prompt Ask user, Return user prompt
 		 * @param string $prompt message for user
 		 * @param bool   $hidden hide text like password prompt
-		 * @return \string
+		 * @return string
 		 */
 		public static function prompt($prompt = "", $hidden = FALSE)
 		{
@@ -100,7 +100,7 @@
 
 		/**
 		 * Return operating system type
-		 * @return \string
+		 * @return string
 		 */
 		public static function getSystem()
 		{
