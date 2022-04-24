@@ -45,7 +45,7 @@
 				$this->runDefault();
 				return NULL;
 			}
-			$command = $argv[1];
+			$command = mb_strtolower($argv[1]);
 			if (array_key_exists($command, $this->commands)) {
 				if ($this->commands[$command] instanceof Cmd) {
 					$this->commands[$command]->_run();
@@ -82,6 +82,7 @@
 		 */
 		public function registerCmd($command, $cmd)
 		{
+			$command = mb_strtolower($command);
 			if (array_key_exists($command, $this->commands)) {
 				throw new RuntimeException(Console::getColoredString('Command "' . $command . '" already exists', 'light_red'));
 			}
