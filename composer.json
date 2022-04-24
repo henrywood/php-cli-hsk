@@ -1,6 +1,6 @@
 {
 	"name"             :"traineratwot/php-cli",
-	"version"          :"0.0.2",
+	"version"          :"1.0.0",
 	"description"      :"php cli framework",
 	"type"             :"composer-plugin",
 	"license"          :"MIT",
