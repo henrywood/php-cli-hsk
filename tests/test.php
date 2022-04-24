@@ -29,7 +29,7 @@
 
 		public function setup()
 		{
-			$this->registerOption('aaa','a', 1, TBool::class, "описание для aaa");
+			$this->registerOption('cmd','c', 0, TBool::class, "описание для aaa");
 		}
 
 		public function run()
@@ -58,7 +58,6 @@
 
 
 	(new CLI())
-		->registerDefaultCmd(new DefaultCmd())
 		->registerCmd('test',new Test())
 		->registerCmd('test2', function ($options, $params) {
 			var_dump($options);

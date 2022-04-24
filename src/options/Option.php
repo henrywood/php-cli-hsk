@@ -46,7 +46,6 @@
 					}
 					throw new TypeException('"--' . $this->long . '" is require Option', 1);
 				}
-				$this->set(NULL);
 			}
 		}
 
