@@ -2,7 +2,6 @@
 	"name"             :"traineratwot/php-cli",
 	"version"          :"1.0.0",
 	"description"      :"php cli framework",
-	"type"             :"composer-plugin",
 	"license"          :"MIT",
 	"readme"           :"./README.md",
 	"homepage"         :"https://github.com/traineratwot/php-cli",
@@ -21,10 +20,15 @@
 		"CLI",
 		"PSR-4",
 		"framework",
-		"simple"
+		"simple",
+		"cli",
+		"console",
+		"terminal",
+		"command line"
 	],
 	"minimum-stability":"stable",
 	"require"          :{
+		"php": ">=5.6",
 		"phplucidframe/console-table":"^1.2"
 	},
 	"require-dev"      :{
