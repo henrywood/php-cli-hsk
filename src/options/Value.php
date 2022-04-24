@@ -9,6 +9,10 @@
 	{
 
 		/**
+		 * @var Type|null
+		 */
+		public $value;
+		/**
 		 * @var bool|null
 		 */
 		protected $require;
@@ -21,10 +25,6 @@
 		 * @var string|null
 		 */
 		protected $description;
-		/**
-		 * @var Type|null
-		 */
-		public $value;
 
 		/**
 		 * @return void
@@ -40,7 +40,7 @@
 		abstract public function get();
 
 		/**
-		 * @return string
+		 * @return \string
 		 */
 		public function getDescription()
 		{
@@ -48,7 +48,7 @@
 		}
 
 		/**
-		 * @return string
+		 * @return \string
 		 */
 		public function getType()
 		{

@@ -4,7 +4,7 @@
 
 	use Traineratwot\PhpCli\Type;
 
-	class TypeInt extends Type
+	class TInt extends Type
 	{
 		public static $shotName = 'int';
 

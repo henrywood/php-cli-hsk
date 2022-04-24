@@ -5,7 +5,7 @@
 	use RuntimeException;
 	use Traineratwot\PhpCli\options\Option;
 	use Traineratwot\PhpCli\options\Parameter;
-	use Traineratwot\PhpCli\types\TypeString;
+	use Traineratwot\PhpCli\types\TString;
 
 	abstract class Cmd
 	{
@@ -19,6 +19,7 @@
 		{
 			$this->_argPosition = $v;
 		}
+
 		/**
 		 * @return Option[]|Parameter[]
 		 */
@@ -30,7 +31,7 @@
 		/**
 		 * Returns command description
 		 * if return FALSE disable HELP info
-		 * @return string|false|void|null;
+		 * @return \string|false|void|null;
 		 */
 		abstract public function help();
 
@@ -45,6 +46,8 @@
 			$this->run();
 		}
 
+		abstract public function run();
+
 		abstract public function setup();
 
 		/**
@@ -52,11 +55,11 @@
 		 * @param                 $key
 		 * @param                 $require
 		 * @param class-string<T> $type
-		 * @param string          $description
+		 * @param TString         $description
 		 * @return void
 		 * @throws RuntimeException
 		 */
-		public function registerParameter($key, $require, $type = TypeString::class, $description = '')
+		public function registerParameter($key, $require, $type = TString::class, $description = '')
 		{
 			if (debug_backtrace()[1]['function'] !== 'setup') {
 				throw new RuntimeException(Console::getColoredString(__FUNCTION__ . ' Must be called from method setup', 'light_red'));
@@ -69,16 +72,16 @@
 
 		/**
 		 * Register an option for option parsing and help generation
-		 * @param string          $long    multi character option (specified with --)
-		 * @param string|null     $short   one character option (specified with -)
-		 * @param bool|string     $require does this option require an argument? give it a name here
+		 * @param TString         $long    multi character option (specified with --)
+		 * @param TString|null    $short   one character option (specified with -)
+		 * @param bool|TString    $require does this option require an argument? give it a name here
 		 * @template T of Traineratwot\PhpCli\Type
 		 * @param class-string<T> $type
-		 * @param string          $description
+		 * @param TString         $description
 		 * @return void
 		 * @throws RuntimeException
 		 */
-		public function registerOption($long, $short = NULL, $require = FALSE, $type = TypeString::class, $description = '')
+		public function registerOption($long, $short = NULL, $require = FALSE, $type = TString::class, $description = '')
 		{
 			if (debug_backtrace()[1]['function'] !== 'setup') {
 				throw new RuntimeException(__FUNCTION__ . ' Must be called from method setup');
@@ -88,8 +91,6 @@
 				$this->_argPosition++;
 			}
 		}
-
-		abstract public function run();
 
 		public function getArg($key)
 		{

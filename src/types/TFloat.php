@@ -4,13 +4,13 @@
 
 	use Traineratwot\PhpCli\Type;
 
-	class TypeFloat extends Type
+	class TFloat extends Type
 	{
 		public static $shotName = 'float';
 
 		public function validate($value)
 		{
-			return is_numeric($value) ? TRUE : 'Invalid float "'.$value.'"';
+			return is_numeric($value) ? TRUE : 'Invalid float "' . $value . '"';
 		}
 
 		public function get()

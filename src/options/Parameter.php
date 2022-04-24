@@ -27,7 +27,7 @@
 		public function __construct($long, $require, $type, $description, $position)
 		{
 			$this->key         = $long;
-			$this->require     = $require;
+			$this->require     = (bool)$require;
 			$this->type        = $type;
 			$this->description = $description;
 			$this->position    = $position;
@@ -45,9 +45,10 @@
 		{
 			Console::getOpt($argv);
 			$argc = count($argv);
-			if ($argc >= $this->position && !empty($argv[$this->position])) {
+			if ($argc >= $this->position && isset($argv[$this->position])) {
 				$this->set($argv[$this->position]);
-			} elseif ($this->require) {
+			} else
+				if ($this->require) {
 				throw new TypeException('"' . $this->key . '" is require Parameter', 1);
 			}
 		}

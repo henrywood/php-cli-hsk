@@ -1,6 +1,6 @@
 {
 	"name"             :"traineratwot/php-cli",
-	"version"          :"1.0.1",
+	"version"          :"1.1.0",
 	"description"      :"php cli framework",
 	"license"          :"MIT",
 	"readme"           :"./README.md",

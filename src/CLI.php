@@ -67,22 +67,6 @@
 			return NULL;
 		}
 
-		/**
-		 * @throws TypeException
-		 */
-		private function runDefault()
-		{
-			if ($this->defaultCmd instanceof Cmd) {
-				$this->defaultCmd->_run();
-			} elseif (is_callable($this->defaultCmd)) {
-				$Options    = Console::getOpt($Parameters);
-				$defaultCmd = $this->defaultCmd;
-				$defaultCmd($Options, $Parameters);
-			} else {
-				throw new RuntimeException(Console::getColoredString('Unknown usage, use "help" ', 'light_red'));
-			}
-		}
-
 		private function _setup()
 		{
 			$this->h = new Help();
@@ -109,6 +93,29 @@
 		}
 
 		/**
+		 * run after register command
+		 */
+		public function setup()
+		{
+		}
+
+		/**
+		 * @throws TypeException
+		 */
+		private function runDefault()
+		{
+			if ($this->defaultCmd instanceof Cmd) {
+				$this->defaultCmd->_run();
+			} elseif (is_callable($this->defaultCmd)) {
+				$Options    = Console::getOpt($Parameters);
+				$defaultCmd = $this->defaultCmd;
+				$defaultCmd($Options, $Parameters);
+			} else {
+				throw new RuntimeException(Console::getColoredString('Unknown usage, use "help" ', 'light_red'));
+			}
+		}
+
+		/**
 		 * @param Cmd|Callback $cmd
 		 * @return $this
 		 */
@@ -120,13 +127,6 @@
 				$this->defaultCmd->setup();
 			}
 			return $this;
-		}
-
-		/**
-		 * run after register command
-		 */
-		public function setup()
-		{
 		}
 
 	}

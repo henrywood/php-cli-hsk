@@ -19,7 +19,9 @@
 		 */
 		public function __construct($value)
 		{
-			$this->set($value);
+			if ($value !== FALSE) {
+				$this->set($value);
+			}
 		}
 
 		/**
@@ -36,7 +38,7 @@
 		}
 
 		/**
-		 * @return string|TRUE
+		 * @return \string|TRUE
 		 */
 		abstract public function validate($value);
 

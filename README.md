@@ -24,8 +24,8 @@ require __DIR__ . '/vendor/autoload.php';
 use Traineratwot\PhpCli\CLI;
 use Traineratwot\PhpCli\Cmd;
 use Traineratwot\PhpCli\Console;
-use Traineratwot\PhpCli\types\TypeFloat;
-use Traineratwot\PhpCli\types\TypeInt;
+use Traineratwot\PhpCli\types\TFloat;
+use Traineratwot\PhpCli\types\TInt;
 
 class Test extends Cmd
 {
@@ -37,8 +37,8 @@ class Test extends Cmd
 
 	public function setup()
 	{
-		$this->registerParameter('param1', 1, TypeInt::class, "Description for param1");// value after action
-		$this->registerOption('option1', 'o', 0, TypeFloat::class, "Description for option1");//--option1=value,--option1 value,-o=value,-o value
+		$this->registerParameter('param1', 1, TInt::class, "Description for param1");// value after action
+		$this->registerOption('option1', 'o', 0, TFloat::class, "Description for option1");//--option1=value,--option1 value,-o=value,-o value
 	}
 
 	public function run()
