@@ -47,7 +47,7 @@
 
 		public function setup()
 		{
-			$this->registerParameter('test', 0, TInt::class, "описание для test");
+			$this->registerParameter('Test', 0, TInt::class, "описание для test");
 		}
 
 		public function run()
@@ -58,7 +58,7 @@
 
 
 	(new CLI())
-		->registerCmd('test',new Test())
+		->registerCmd('TesT',new Test())
 		->registerCmd('test2', function ($options, $params) {
 			var_dump($options);
 			var_dump($params);

@@ -42,12 +42,13 @@
 					->addHeader('synonyms')
 				;
 				$helps    = [];
-				$commands = $this->CIL->getCommands();
+				$commands = $this->CIL->getCommands($aliases);
 				foreach ($commands as $command => $cls) {
 					if ($cls instanceof Cmd) {
+						$c                      = isset($aliases[$command]) ? $aliases[$command] : $command;
 						$helps[get_class($cls)] = [
 							'cls'      => $cls,
-							'commands' => array_merge(isset($helps[get_class($cls)]) ? $helps[get_class($cls)]['commands'] : [], [$command]),
+							'commands' => array_merge(isset($helps[get_class($cls)]) ? $helps[get_class($cls)]['commands'] : [], [$c]),
 						];
 					}
 				}
@@ -72,11 +73,13 @@
 				}
 				$table->display();
 			} else {
-				$commands = $this->CIL->getCommands();
-				if (!array_key_exists($command, $commands)) {
+				$commands = $this->CIL->getCommands($aliases);
+				$c        = mb_strtolower($command);
+				if (!array_key_exists($c, $commands)) {
 					throw new RuntimeException(Console::getColoredString('Unknown command "' . $command . '" ', 'light_red'));
 				}
-				$cls = $commands[$command];
+				$command = $aliases[$c];
+				$cls     = $commands[$c];
 				if ($cls instanceof Cmd) {
 					$description = $cls->help();
 					if ($description === FALSE) {

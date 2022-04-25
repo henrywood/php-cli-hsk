@@ -27,8 +27,9 @@
 			$this->commands = [];
 		}
 
-		public function getCommands()
+		public function getCommands(&$aliases = [])
 		{
+			$aliases = $this->aliases;
 			return array_merge(['Default' => $this->defaultCmd], $this->commands);
 		}
 
@@ -47,12 +48,12 @@
 				return NULL;
 			}
 			$command = mb_strtolower($argv[1]);
-			if (array_key_exists($command, $this->aliases)) {
-				if ($this->aliases[$command] instanceof Cmd) {
-					$this->aliases[$command]->_run();
+			if (array_key_exists($command, $this->commands)) {
+				if ($this->commands[$command] instanceof Cmd) {
+					$this->commands[$command]->_run();
 				} elseif (is_callable($this->aliases[$command])) {
 					$Options = Console::getOpt($Parameters);
-					$this->aliases[$command]($Options, $Parameters);
+					$this->commands[$command]($Options, $Parameters);
 				} else {
 					throw new RuntimeException(Console::getColoredString('Wrong command "' . $command . '" ', 'light_red'));
 				}
@@ -83,16 +84,15 @@
 		 */
 		public function registerCmd($command, $cmd)
 		{
-
 			if (array_key_exists($command, $this->commands)) {
 				throw new RuntimeException(Console::getColoredString('Command "' . $command . '" already exists', 'light_red'));
 			}
-			$this->commands[$command] = $cmd;
-			if ($this->commands[$command] instanceof Cmd) {
-				$this->commands[$command]->setup();
+			$alias                  = mb_strtolower($command);
+			$this->aliases[$alias]  = $command;
+			$this->commands[$alias] = $cmd;
+			if ($this->commands[$alias] instanceof Cmd) {
+				$this->commands[$alias]->setup();
 			}
-			$alias                 = mb_strtolower($command);
-			$this->aliases[$alias] = $this->commands[$command];
 			return $this;
 		}
 
