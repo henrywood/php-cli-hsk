@@ -2,6 +2,8 @@
 
 	namespace Traineratwot\PhpCli;
 
+	use Exception;
+
 	class Console
 	{
 		/**
@@ -29,8 +31,8 @@
 		/**
 		 * @var string[]
 		 */
-		public static $BACKGROUND_COLORS
-			= [
+		public static  $BACKGROUND_COLORS
+								 = [
 				'black'      => '40',
 				'red'        => '41',
 				'green'      => '42',
@@ -40,6 +42,8 @@
 				'cyan'       => '46',
 				'light_gray' => '47',
 			];
+		private static $times    = [];
+		private static $progress = [];
 
 		/**
 		 * Returns all foreground color names
@@ -250,5 +254,61 @@
 
 			}
 			return $options;
+		}
+
+		public static function time($name)
+		{
+			self::$times[$name] = microtime(1);
+		}
+
+		public static function timeGet($name)
+		{
+			$time = microtime(1) - self::$times[$name];
+			self::info($name . ": " . $time . 's');
+		}
+
+		public static function timeEnd($name)
+		{
+			$time = microtime(1) - self::$times[$name];
+			self::info($name . ": " . $time . 's');
+			unset(self::$times[$name]);
+		}
+
+		public static function getColSize($min = 80)
+		{
+			$col = $min;
+			try {
+				if (PHP_OS !== 'Linux') {
+					$a1  = shell_exec('mode con');
+					$arr = explode("\n", $a1);
+					$col = trim(explode(':', $arr[4])[1]);
+
+				} else {
+					$col = exec('tput cols');
+				}
+			} catch (Exception $ex) {
+			}
+			return (int)$col;
+		}
+
+		/**
+		 * @return void
+		 */
+		public static function progress($name, $current, $total, $color = 'white')
+		{
+			$current = (int)$current;
+			$total   = (int)$total;
+			$shell   = self::getColSize();
+
+			$o          = $current / $total;
+			$fill       = (int)self::$progress[$name];
+			$needLength = floor($shell * $o);
+			$needAdd    = $needLength - $fill;
+			if ($needAdd >= 1) {
+				for ($i = 0; $i < $needAdd; $i++) {
+					echo self::getColoredString("█",$color);
+				}
+			}
+			self::$progress[$name] = $needLength;
 		}
 	}
