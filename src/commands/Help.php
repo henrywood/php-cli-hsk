@@ -67,7 +67,7 @@
 						  ->addColumn("\> $mainCommand")
 						  ->addColumn($args)
 						  ->addColumn((string)$description)
-						  ->addColumn(implode(", \n", $info['commands']))
+						  ->addColumn(implode(", ", $info['commands']))
 						  ->addBorderLine()
 					;
 				}
@@ -112,7 +112,7 @@
 							$cls = $arg['typeCls'];
 							$cls = new $cls(FALSE);
 							if ($cls instanceof TEnum) {
-								$table2->addColumn($arg['type'] . '[' . implode(", \n", $cls->enums()) . ']');
+								$table2->addColumn($arg['type'] . '[' . implode(',', $cls->enums()) . ']');
 							} else {
 								$table2->addColumn((string)$arg['type']);
 							}
