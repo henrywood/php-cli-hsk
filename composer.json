@@ -1,10 +1,10 @@
 {
 	"name"             :"traineratwot/php-cli",
-	"version"          :"1.1.8",
+	"version"          :"1.1.9",
 	"description"      :"php cli framework",
 	"license"          :"MIT",
 	"scripts"          :{
-		"up:release":"gh release create \"1.1.8\" --generate-notes"
+		"up:release":"gh release create \"1.1.9\" --generate-notes"
 	},
 	"readme"           :"./README.md",
 	"homepage"         :"https://github.com/traineratwot/php-cli",
