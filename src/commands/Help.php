@@ -188,10 +188,10 @@
 			$terminal      = new Terminal();
 			$terminalWidth = $terminal->getWidth();
 			$result        = implode(", ", $args);
-			$limit         = $terminalWidth * 0.5;
+			$limit         = $terminalWidth * 0.6;
 			if (strlen($result) > $limit) {
 				$result = substr($result, 0, $limit) . '...';
 			}
-			return implode(", ", $args);
+			return $result;
 		}
 	}
