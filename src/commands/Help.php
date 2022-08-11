@@ -34,7 +34,15 @@
 		{
 			$command = $this->getArg('cmd');
 			if (!$command) {
-				$table = new ConsoleTable();
+				$terminal      = new Terminal();
+				$terminalWidth = $terminal->getWidth();
+				$limits        = [
+					$terminalWidth * 0.2,
+					$terminalWidth * 0.5,
+					$terminalWidth * 0.2,
+					$terminalWidth * 0.1,
+				];
+				$table         = new ConsoleTable();
 				$table
 					->hideBorder()
 					->addHeader('command')
@@ -63,12 +71,13 @@
 					/**
 					 * @var Option|Parameter $arguments
 					 */
+
 					$args = $this->extracted($arguments);
 					$table->addRow()
-						  ->addColumn("\> $mainCommand")
-						  ->addColumn($args)
-						  ->addColumn((string)$description)
-						  ->addColumn(implode(", ", $info['commands']))
+						  ->addColumn(self::substr("\> $mainCommand", $limits[0]))
+						  ->addColumn(self::substr($args, $limits[1]))
+						  ->addColumn(self::substr((string)$description, $limits[2]))
+						  ->addColumn(self::substr(implode(", ", $info['commands']), $limits[3]))
 						  ->addBorderLine()
 					;
 				}
@@ -185,13 +194,20 @@
 					$args[] = $arg;
 				}
 			}
-			$terminal      = new Terminal();
-			$terminalWidth = $terminal->getWidth();
-			$result        = implode(", ", $args);
-			$limit         = $terminalWidth * 0.6;
-			if (strlen($result) > $limit) {
-				$result = substr($result, 0, $limit) . '...';
+
+			return implode(", ", $args);
+		}
+
+		public static function substr($str, $limit = 0)
+		{
+			$limit = (int)abs(floor($limit));
+			if (strlen($str) > $limit) {
+				if ($limit > 3) {
+					$str = mb_substr($str, 0, $limit - 3) . '...';
+				} else {
+					$str = mb_substr($str, 0, $limit);
+				}
 			}
-			return $result;
+			return $str;
 		}
 	}
