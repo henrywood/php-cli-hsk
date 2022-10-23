@@ -3,6 +3,7 @@
 	namespace Traineratwot\PhpCli\options;
 
 	use Traineratwot\PhpCli\Console;
+	use Traineratwot\PhpCli\Type;
 	use Traineratwot\PhpCli\TypeException;
 
 	class Parameter extends Value
@@ -35,10 +36,10 @@
 
 		public function get()
 		{
-			if ($this->value) {
+			if ($this->value instanceof Type) {
 				return $this->value->get();
 			}
-			return NULL;
+			return $this->value;
 		}
 
 		public function initValue()
@@ -47,24 +48,8 @@
 			$argc = count($argv);
 			if ($argc >= $this->position && isset($argv[$this->position])) {
 				$this->set($argv[$this->position]);
-			} else
-				if ($this->require) {
+			} elseif ($this->require) {
 				throw new TypeException('"' . $this->key . '" is require Parameter', 1);
-			}
-		}
-
-		/**
-		 * @param $value
-		 * @return void
-		 * @throws TypeException
-		 */
-		public function set($value)
-		{
-			try {
-				$cls         = $this->type;
-				$this->value = new $cls($value);
-			} catch (TypeException $e) {
-				throw new TypeException($e->getMessage(), $e->getCode());
 			}
 		}
 

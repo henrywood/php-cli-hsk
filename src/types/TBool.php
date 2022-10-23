@@ -16,7 +16,7 @@
 		 */
 		public function validate($value)
 		{
-			$value = mb_strtolower($value);
+			$value = mb_strtolower((string)$value);
 			if (in_array($value, array_merge(self::$no, self::$yes), TRUE)) {
 				return TRUE;
 			}
@@ -27,7 +27,7 @@
 		{
 			$r = $this->validate($value);
 			if ($r === TRUE) {
-				if (in_array(mb_strtolower($value), self::$yes, TRUE)) {
+				if (in_array(mb_strtolower((string)$value), self::$yes, TRUE)) {
 					$this->value = TRUE;
 				} else {
 					$this->value = FALSE;

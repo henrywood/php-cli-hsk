@@ -52,14 +52,13 @@
 
 		/**
 		 * @template T of Traineratwot\PhpCli\Type
-		 * @param                 $key
-		 * @param                 $require
-		 * @param class-string<T> $type
-		 * @param string          $description
+		 * @param string             $key
+		 * @param bool               $require
+		 * @param class-string|array $type
+		 * @param string             $description
 		 * @return void
-		 * @throws RuntimeException
 		 */
-		public function registerParameter($key, $require, $type = TString::class, $description = '')
+		public function registerParameter(string $key, bool $require, string|array $type = TString::class, string $description = '')
 		{
 			if (debug_backtrace()[1]['function'] !== 'setup') {
 				throw new RuntimeException(Console::getColoredString(__FUNCTION__ . ' Must be called from method setup', 'light_red'));
@@ -72,16 +71,15 @@
 
 		/**
 		 * Register an option for option parsing and help generation
-		 * @param string          $long    multi character option (specified with --)
-		 * @param string|null     $short   one character option (specified with -)
-		 * @param bool|TString    $require does this option require an argument? give it a name here
-		 * @template T of Traineratwot\PhpCli\Type
-		 * @param class-string<T> $type
-		 * @param string          $description
+		 * @param string       $long    multi character option (specified with --)
+		 * @param string|null  $short   one character option (specified with -)
+		 * @param bool|TString $require does this option require an argument? give it a name here
+		 * @param string|array $type
+		 * @param string       $description
 		 * @return void
-		 * @throws RuntimeException
+		 * @template T of Traineratwot\PhpCli\Type
 		 */
-		public function registerOption($long, $short = NULL, $require = FALSE, $type = TString::class, $description = '')
+		public function registerOption(string $long, string $short = NULL, bool $require = FALSE, string|array $type = TString::class, $description = '')
 		{
 			if (debug_backtrace()[1]['function'] !== 'setup') {
 				throw new RuntimeException(__FUNCTION__ . ' Must be called from method setup');

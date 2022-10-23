@@ -1,10 +1,10 @@
 {
 	"name"             :"traineratwot/php-cli",
-	"version"          :"1.2.0",
+	"version"          :"2.0.0",
 	"description"      :"php cli framework",
 	"license"          :"MIT",
 	"scripts"          :{
-		"up:release":"gh release create \"1.2.0\" --generate-notes"
+		"up:release":"gh release create \"2.0.0\" --generate-notes"
 	},
 	"readme"           :"./README.md",
 	"homepage"         :"https://github.com/traineratwot/php-cli",
@@ -31,7 +31,7 @@
 	],
 	"minimum-stability":"stable",
 	"require"          :{
-		"php"                        :">=5.6",
+		"php"                        :"^8.1",
 		"phplucidframe/console-table":"^1.2",
 		"symfony/console": "^5.4"
 	},

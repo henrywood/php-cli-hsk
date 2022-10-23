@@ -84,7 +84,7 @@
 				$table->display();
 			} else {
 				$commands = $this->CIL->getCommands($aliases);
-				$c        = mb_strtolower($command);
+				$c        = mb_strtolower((string)$command);
 				if (!array_key_exists($c, $commands)) {
 					throw new RuntimeException(Console::getColoredString('Unknown command "' . $command . '" ', 'light_red'));
 				}
@@ -155,14 +155,20 @@
 		public function extracted($arguments, &$args = [], &$match = [])
 		{
 			foreach ($arguments as $key => $argument) {
-				$type    = '';
+				$type    = [];
 				$require = $argument->getRequire();
-				$t       = $argument->getType();
-				if ($t && class_exists($t)) {
-					$type = $t::$shotName;
-				} else {
-					$t = NULL;
+				$types   = $argument->getType();
+				if (!is_array($types)) {
+					$types = [$types];
 				}
+				foreach ($types as $t) {
+					if ($t && enum_exists($t)) {
+						$type[] = 'enum:' . $t;
+					} elseif ($t && class_exists($t)) {
+						$type[] = $t::$shotName;
+					}
+				}
+				$type         = implode(', ', $type);
 				$description  = $argument->getDescription();
 				$key_extended = $key;
 				if ($argument instanceof Option) {

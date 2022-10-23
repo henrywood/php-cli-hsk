@@ -4,7 +4,7 @@
 
 	use Traineratwot\PhpCli\Type;
 
-	class TEnum extends Type
+	abstract class TEnum extends Type
 	{
 		public static $shotName = 'Enum';
 
@@ -22,7 +22,7 @@
 		public function validate($value)
 		{
 			foreach ($this->enums() as $e) {
-				if (mb_strtolower($e) === mb_strtolower($value)) {
+				if (mb_strtolower((string)$e) === mb_strtolower((string)$value)) {
 					return TRUE;
 				}
 			}
@@ -35,7 +35,7 @@
 		public function get()
 		{
 			foreach ($this->enums() as $e) {
-				if (mb_strtolower($e) === mb_strtolower($this->value)) {
+				if (mb_strtolower((string)$e) === mb_strtolower((string)$this->value)) {
 					return $e;
 				}
 			}

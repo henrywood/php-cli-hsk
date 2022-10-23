@@ -4,6 +4,7 @@
 
 	use RuntimeException;
 	use Traineratwot\PhpCli\Console;
+	use Traineratwot\PhpCli\Type;
 	use Traineratwot\PhpCli\TypeException;
 
 	class Option extends Value
@@ -27,40 +28,28 @@
 
 		public function get()
 		{
-			if ($this->value) {
+			if ($this->value instanceof Type) {
 				return $this->value->get();
 			}
-			return NULL;
+			return $this->value;
 		}
 
 		public function initValue()
 		{
 			$option = Console::getOpt();
 			if (array_key_exists($this->long, $option) || array_key_exists($this->short, $option)) {
-				$v = $option[$this->short] ?: $option[$this->long];
-				$this->set($v);
-			} else {
-				if ($this->require) {
-					if ($this->short) {
-						throw new TypeException('"-' . $this->short . '" is require Option', 1);
-					}
-					throw new TypeException('"--' . $this->long . '" is require Option', 1);
+				$v = NULL;
+				if (isset($option[$this->short])) {
+					$v = $option[$this->short];
+				} elseif (isset($option[$this->long])) {
+					$v = $option[$this->long];
 				}
-			}
-		}
-
-		/**
-		 * @param $value
-		 * @return void
-		 * @throws TypeException
-		 */
-		public function set($value)
-		{
-			try {
-				$cls         = $this->type;
-				$this->value = new $cls($value);
-			} catch (TypeException $e) {
-				throw new TypeException($e->getMessage(), $e->getCode());
+				$this->set($v);
+			} elseif ($this->require) {
+				if ($this->short) {
+					throw new TypeException('"-' . $this->short . '" is require Option', 1);
+				}
+				throw new TypeException('"--' . $this->long . '" is require Option', 1);
 			}
 		}
 
