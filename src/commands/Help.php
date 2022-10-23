@@ -161,13 +161,19 @@
 		}
 
 		/**
-		 * @param       $arguments
-		 * @param array $args
-		 * @param array $match
+		 * @param            $arguments
+		 * @param array|null $args
+		 * @param array|null $match
 		 * @return string
 		 */
-		public function extracted($arguments, &$args = [], &$match = [])
+		public function extracted($arguments,array &$args = null, array &$match = null)
 		{
+			if(!is_array($args)){
+				$args =[];
+			}
+			if(!is_array($match)){
+				$match =[];
+			}
 			foreach ($arguments as $key => $argument) {
 				$type    = [];
 				$require = $argument->getRequire();
