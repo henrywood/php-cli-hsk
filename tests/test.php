@@ -48,6 +48,17 @@
 		case test6;
 		case test7;
 	}
+	enum test23
+	{
+		case test1;
+		case test2;
+		case test3;
+		case test4;
+		case test5;
+		case test6;
+		case test7;
+	}
+
 
 	class test3 extends Cmd
 	{
@@ -60,7 +71,7 @@
 
 		public function setup()
 		{
-			$this->registerParameter('cmd', 1, test32::class, "описание для bbb");
+			$this->registerOption('cmd', 'c',1, [test32::class,test23::class], "описание для bbb");
 		}
 
 		public function run()

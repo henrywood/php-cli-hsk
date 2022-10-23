@@ -119,13 +119,27 @@
 							$table2->addRow()
 								   ->addColumn((string)$arg['key'])
 							;
-							$cls = $arg['typeCls'];
-							$cls = new $cls(FALSE);
-							if ($cls instanceof TEnum) {
-								$table2->addColumn($arg['type'] . '[' . implode(',', $cls->enums()) . ']');
-							} else {
-								$table2->addColumn((string)$arg['type']);
+							$types = $arg['typeCls'];
+							if (!is_array($types)) {
+								$types = [$types];
 							}
+							$type = [];
+							foreach ($types as $t) {
+								if ($t && enum_exists($t)) {
+									$type[] =  $arg['type'];
+								} elseif ($t && class_exists($t)) {
+									$cls = $arg['typeCls'];
+									$cls = new $cls(FALSE);
+									if ($cls instanceof TEnum) {
+										$type[] = '[' . implode(',', $cls->enums()) . ']';
+									} else {
+										$type[] = $arg['type'];
+									}
+								}
+							}
+							$type = implode(', ', $type);
+							$table2->addColumn((string)$type);
+
 							$table2->addColumn((string)$arg['require'])
 								   ->addColumn((string)$arg['description'])
 								   ->addBorderLine()
