@@ -91,7 +91,7 @@
 			$this->aliases[$alias]  = $command;
 			$this->commands[$alias] = $cmd;
 			if ($this->commands[$alias] instanceof Cmd) {
-				$this->commands[$alias]->setup();
+				$this->commands[$alias]->setScope($this)->setup();
 			}
 			return $this;
 		}
@@ -128,7 +128,7 @@
 			$this->defaultCmd = $cmd;
 			if ($this->defaultCmd instanceof Cmd) {
 				$this->defaultCmd->setArgPosition(1);
-				$this->defaultCmd->setup();
+				$this->defaultCmd->setScope($this)->setup();
 			}
 			return $this;
 		}
