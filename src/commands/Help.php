@@ -15,15 +15,6 @@
 
 	class Help extends Cmd
 	{
-		/**
-		 * @var CLI|null
-		 */
-		private $CIL;
-
-		public function setScope($CLI)
-		{
-			$this->CIL = $CLI;
-		}
 
 		public function setup()
 		{
@@ -54,7 +45,7 @@
 				$commands = $this->CIL->getCommands($aliases);
 				foreach ($commands as $command => $cls) {
 					if ($cls instanceof Cmd) {
-						$c                      = isset($aliases[$command]) ? $aliases[$command] : $command;
+						$c                      = $aliases[$command] ?? $command;
 						$helps[get_class($cls)] = [
 							'cls'      => $cls,
 							'commands' => array_merge(isset($helps[get_class($cls)]) ? $helps[get_class($cls)]['commands'] : [], [$c]),

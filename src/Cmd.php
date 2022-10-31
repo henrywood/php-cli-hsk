@@ -9,6 +9,19 @@
 
 	abstract class Cmd
 	{
+		public CLI $CIL;
+
+		public function setScope($CLI)
+		{
+			$this->CIL = $CLI;
+			return $this;
+		}
+
+		public function getScope()
+		{
+			return $this->CLI;
+		}
+
 		private $_argPosition = 2;
 		/**
 		 * @var Option[]|Parameter[]
