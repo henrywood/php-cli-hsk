@@ -258,6 +258,10 @@
 
 		public static function time($name)
 		{
+			if (isset(self::$times[$name])) {
+				self::timeEnd($name);
+				return;
+			}
 			self::$times[$name] = microtime(1);
 		}
 
@@ -306,7 +310,7 @@
 			$needAdd    = $needLength - $fill;
 			if ($needAdd >= 1) {
 				for ($i = 0; $i < $needAdd; $i++) {
-					echo self::getColoredString("█",$color);
+					echo self::getColoredString("█", $color);
 				}
 			}
 			self::$progress[$name] = $needLength;
