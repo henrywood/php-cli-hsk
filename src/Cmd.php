@@ -1,11 +1,11 @@
 <?php
 
-	namespace Traineratwot\PhpCli;
+	namespace Henrywood\PhpCli;
 
 	use RuntimeException;
-	use Traineratwot\PhpCli\options\Option;
-	use Traineratwot\PhpCli\options\Parameter;
-	use Traineratwot\PhpCli\types\TString;
+	use Henrywood\PhpCli\options\Option;
+	use Henrywood\PhpCli\options\Parameter;
+	use Henrywood\PhpCli\types\TString;
 
 	abstract class Cmd
 	{
