@@ -1,17 +1,17 @@
 <?php
 
-	namespace Traineratwot\PhpCli\commands;
+	namespace Henrywood\PhpCli\commands;
 
 	use LucidFrame\Console\ConsoleTable;
 	use RuntimeException;
 	use Symfony\Component\Console\Terminal;
-	use Traineratwot\PhpCli\CLI;
-	use Traineratwot\PhpCli\Cmd;
-	use Traineratwot\PhpCli\Console;
-	use Traineratwot\PhpCli\options\Option;
-	use Traineratwot\PhpCli\options\Parameter;
-	use Traineratwot\PhpCli\types\TEnum;
-	use Traineratwot\PhpCli\types\TString;
+	use Henrywood\PhpCli\CLI;
+	use Henrywood\PhpCli\Cmd;
+	use Henrywood\PhpCli\Console;
+	use Henrywood\PhpCli\options\Option;
+	use Henrywood\PhpCli\options\Parameter;
+	use Henrywood\PhpCli\types\TEnum;
+	use Henrywood\PhpCli\types\TString;
 
 	class Help extends Cmd
 	{
