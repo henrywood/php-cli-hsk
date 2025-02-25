@@ -1,6 +1,6 @@
 {
-	"name"             :"traineratwot/php-cli",
-	"version"          :"2.0.2",
+	"name"             :"henrywood/php-cli-hsk",
+	"version"          :"3.0.2",
 	"description"      :"php cli framework",
 	"license"          :"MIT",
 	"scripts"          :{
@@ -10,13 +10,13 @@
 	"homepage"         :"https://github.com/traineratwot/php-cli",
 	"autoload"         :{
 		"psr-4":{
-			"Traineratwot\\PhpCli\\":"src/"
+			"Henrywood\\PhpCli\\":"src/"
 		}
 	},
 	"authors"          :[
 		{
-			"name" :"Kirill",
-			"email":"Traineratwot@yandex.ru"
+			"name" :"Henrik Skov",
+			"email":"henry.wood.dk@gmail.com"
 		}
 	],
 	"keywords"         :[
