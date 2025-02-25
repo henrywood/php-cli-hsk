@@ -1,9 +1,9 @@
 <?php
 
-	namespace Traineratwot\PhpCli\types;
+	namespace Henrywood\PhpCli\types;
 
-	use Traineratwot\PhpCli\Type;
-	use Traineratwot\PhpCli\TypeException;
+	use Henrywood\PhpCli\Type;
+	use Henrywood\PhpCli\TypeException;
 
 	class TBool extends Type
 	{
