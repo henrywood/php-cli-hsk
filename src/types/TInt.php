@@ -1,8 +1,8 @@
 <?php
 
-	namespace Traineratwot\PhpCli\types;
+	namespace Henrywood\PhpCli\types;
 
-	use Traineratwot\PhpCli\Type;
+	use Henrywood\PhpCli\Type;
 
 	class TInt extends Type
 	{
