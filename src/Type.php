@@ -1,6 +1,6 @@
 <?php
 
-	namespace Traineratwot\PhpCli;
+	namespace Henrywood\PhpCli;
 
 	abstract class Type
 	{
