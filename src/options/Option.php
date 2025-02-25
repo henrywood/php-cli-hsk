@@ -1,11 +1,11 @@
 <?php
 
-	namespace Traineratwot\PhpCli\options;
+	namespace Henrywood\PhpCli\options;
 
 	use RuntimeException;
-	use Traineratwot\PhpCli\Console;
-	use Traineratwot\PhpCli\Type;
-	use Traineratwot\PhpCli\TypeException;
+	use Henrywood\PhpCli\Console;
+	use Henrywood\PhpCli\Type;
+	use Henrywood\PhpCli\TypeException;
 
 	class Option extends Value
 	{
