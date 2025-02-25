@@ -1,10 +1,10 @@
 <?php
 
-	namespace Traineratwot\PhpCli\options;
+	namespace Henrywood\PhpCli\options;
 
 	use ReflectionEnum;
-	use Traineratwot\PhpCli\Type;
-	use Traineratwot\PhpCli\TypeException;
+	use Henrywood\PhpCli\Type;
+	use Henrywood\PhpCli\TypeException;
 
 	abstract class Value
 	{
