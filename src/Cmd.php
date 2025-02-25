@@ -6,6 +6,7 @@
 	use Henrywood\PhpCli\options\Option;
 	use Henrywood\PhpCli\options\Parameter;
 	use Henrywood\PhpCli\types\TString;
+        use Henrywood\PhpCli\CLI;
 
 	abstract class Cmd
 	{
