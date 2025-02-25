@@ -1,6 +1,6 @@
 <?php
 
-	namespace Traineratwot\PhpCli;
+	namespace Henrywood\PhpCli;
 
 	use Exception;
 	use RuntimeException;
