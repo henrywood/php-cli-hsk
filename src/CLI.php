@@ -4,7 +4,7 @@
 
 	use Exception;
 	use RuntimeException;
-	use Traineratwot\PhpCli\commands\Help;
+	use Henrywood\PhpCli\commands\Help;
 
 	class CLI
 	{
