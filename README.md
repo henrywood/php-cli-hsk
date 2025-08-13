@@ -13,7 +13,7 @@ It takes care of
 - **support Enum**
 
 Use composer:
-```php composer.phar require traineratwot/php-cli```
+```php composer.phar require henrywood/php-cli-hsk```
 
 ## Usage and Examples
 
