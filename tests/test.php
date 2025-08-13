@@ -2,13 +2,13 @@
 	namespace index;
 	require dirname(__DIR__) . '/vendor/autoload.php';
 
-	use Traineratwot\PhpCli\CLI;
-	use Traineratwot\PhpCli\Cmd;
-	use Traineratwot\PhpCli\commands\Help;
-	use Traineratwot\PhpCli\Console;
-	use Traineratwot\PhpCli\types\TEnum;
-	use Traineratwot\PhpCli\types\TFloat;
-	use Traineratwot\PhpCli\types\TInt;
+	use Henrywood\PhpCli\CLI;
+	use Henrywood\PhpCli\Cmd;
+	use Henrywood\PhpCli\commands\Help;
+	use Henrywood\PhpCli\Console;
+	use Henrywood\PhpCli\types\TEnum;
+	use Henrywood\PhpCli\types\TFloat;
+	use Henrywood\PhpCli\types\TInt;
 
 	enum TestEnum
 	{
