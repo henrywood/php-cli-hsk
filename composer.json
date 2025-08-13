@@ -4,10 +4,10 @@
 	"description"      :"php cli framework",
 	"license"          :"MIT",
 	"scripts"          :{
-		"up:release":"gh release create \"2.0.2\" --generate-notes"
+		"up:release":"gh release create \"3.5.0\" --generate-notes"
 	},
 	"readme"           :"./README.md",
-	"homepage"         :"https://github.com/traineratwot/php-cli",
+	"homepage"         :"https://github.com/henrywood/php-cli-hsk",
 	"autoload"         :{
 		"psr-4":{
 			"Henrywood\\PhpCli\\":"src/"
