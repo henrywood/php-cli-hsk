@@ -1,6 +1,6 @@
 {
 	"name"             :"henrywood/php-cli-hsk",
-	"version"          :"3.0.2",
+	"version"          :"3.5.0",
 	"description"      :"php cli framework",
 	"license"          :"MIT",
 	"scripts"          :{
